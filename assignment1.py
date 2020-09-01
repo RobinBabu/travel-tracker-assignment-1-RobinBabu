@@ -5,15 +5,45 @@ Date started: 1/09/2020
 GitHub URL: https://github.com/RobinBabu
 """
 
+places_details = []
+places_file = open('places.csv')
+
 
 def main():
     print("Welcome Travel Tracker 1.0 - by Robin Babu")
 
-    print(" Menu                         \n    "
-          " L - List places              \n    "
-          " A - Add a new place          \n    "
-          " M - Mark a place as visited  \n    "
-          " Q - Quit")
+    choice = input("Menu: \n"
+                   "L - List places \n"
+                   "A - Add new place \n"
+                   "M - Mark a place as visited \n"
+                   "Q - Quit \n"
+                   ">>>").upper()
+
+
+
+while choice != "Q":
+    if choice == "L":
+        places_file = open('places.csv', 'w')
+
+
+
+
+"""
+while choice != "Q":
+    if choice == "L":
+        print()
+    else if choice == <second option>
+        <do second task>
+    ...
+    else if choice == <n-th option>
+        <do n-th task>
+    else
+        display invalid input error message
+    display menu
+    get choice
+<do final thing, if needed>
+
+"""
 
 
 
