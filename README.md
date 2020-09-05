@@ -1,7 +1,7 @@
 # CP1404 Assignment 1 - Travel Tracker
 Assignment 1 for CP1404/CP1804, IT@JCU
 
-By: **your name here**  
+By: **Robin Babu**  
 
 This repo contains starter files including a Python file and two CSV files.  
 (`temp.csv` is to copy from in case you delete the contents of `places.csv` and want the original data back).  
@@ -11,7 +11,7 @@ Note: If you use the free WakaTime service on your own machine, you can track ex
 See https://trello.com/c/6H24THnj/21-wakatime-time-tracking-for-ides-join-our-leaderboard
 
 1. How long did the entire assignment 1 project take you?
-> answer...
+> Around a week with several hours debugging errors alone
 
 2. What do you plan to do  differently in your development process for assignment 2?
-> answer...
+> Start task earlier and refer to pracs/lecture content more actively.
