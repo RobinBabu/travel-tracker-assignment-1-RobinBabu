@@ -4,53 +4,52 @@ Name: Robin Babu
 Date started: 1/09/2020
 GitHub URL: https://github.com/RobinBabu
 """
-import csv
-from operator import itemgetter
+
+places_file = open('places.csv', 'r')
+valid_input = False
+place_details = []
 
 
 def main():
+    """Travel Tracker program allows a user to track places they wish to visit and places they have already visited"""
     print("Welcome Travel Tracker 1.0 - by Robin Babu")
-    list_of_places = load_original_file()
+    choice = get_choice()
+
+    while choice != "Q":
+        if choice == "L":
+            print('List test')
+            return
+        elif choice == "A":
+            open('places.csv', 'w')
+            print('Add new place test')
+            return
+
+        elif choice == "M":
+            print('Mark place as visited test ')
+            return
+        print("")
+        choice = get_choice()
+
+    print("{} places saved to places.csv \nHave a nice day! :)".format(len(place_details)))
+
+
+def get_choice():
+    """Grabs user input from menu and navigate to selected input."""
     choice = input("Menu: \n"
                    "L - List places \n"
                    "A - Add new place \n"
                    "M - Mark a place as visited \n"
                    "Q - Quit \n"
                    ">>>").upper()
-
-    while choice != "Q":
-        if choice == "L":
-            print_list_places(list_of_places)
-        elif choice == "A":
-            add_new_place(list_of_places)
-        elif choice == "M":
-            mark_visited(list_of_places)
-        elif choice == "":
-            print("Input cannot be blank")
-        else:
-            print("Invalid menu choice")
-
-        choice = input("Menu: \nL - List places \nA - Add new place \nM - Mark a place as visited \nQ - Quit "
-                       "\n>>> ").upper()
-
-    with open('places.csv', 'w', newline='') as resultFile:
-        writer = csv.writer(resultFile)
-        writer.writerows(list_of_places)
-    print('{} places saved to places.csv\nHave a nice day :) '.format(len(list_of_places)))
-
-
-# Function Used to Open Initial Places File.
-def load_original_file():
-    file_places = open("places.csv", "r")
-    reader = csv.reader(file_places, delimiter=',')
-    places = list(reader)
-    print('{} places loaded from places.csv'.format(len(places)))
-    # String to integer conversion
-    for place in places:
-        place[1] = int(place[1])
-    file_places.close()
-    places.sort(key=itemgetter(1, 0))
-    return places
+    while choice not in ("L", "A", "M", "Q"):
+        print("Invalid menu choice")
+        choice = input("Menu: \n"
+                       " L - List place \n"
+                       " A - Add a new place \n"
+                       " M - Mark place as visited \n"
+                       " Q - Quit \n"
+                       ">>>").upper()
+    return choice
 
 
 if __name__ == '__main__':
