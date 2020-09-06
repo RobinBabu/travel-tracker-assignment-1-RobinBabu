@@ -11,10 +11,10 @@ def main():
     """Travel Tracker program allows a user to track places they wish to visit and places they have already visited"""
     valid_input = False
     place_details = []
-    places_file = open('places.csv', 'r')   # Loads file
+    places_file = open('places.csv', 'r')   # Loads file to read file contents.
 
     get_list_of_lists(place_details, places_file)
-    print("Welcome Travel Tracker 1.0 - by Robin Babu")
+    print("Welcome to Travel Tracker 1.0 - by Robin Babu")
     print("{} places loaded from places.csv".format(len(place_details)))
 
     choice = get_choice()
@@ -32,9 +32,12 @@ def main():
                     print("Invalid input,")
 
         elif choice == "M":
-            print('Mark place as visited test ')
-            return
-
+            while not valid_input:
+                try:
+                    mark_visited(place_details)
+                    valid_input = True
+                except ValueError:
+                    print("please make sure the entered value is an integer")
         print("")
         choice = get_choice()
         valid_input = False
@@ -60,7 +63,7 @@ def get_choice():
                    "M - Mark a place as visited \n"
                    "Q - Quit \n"
                    ">>>").upper()
-
+    # Menu error checking.
     while choice not in ("L", "A", "M", "Q"):
         print("Invalid menu choice, please enter a valid menu option.")
         choice = input("Menu: \n"
@@ -82,8 +85,8 @@ def print_list(place_details):
             visited_status = ' '
         else:
             visited_status = '*'
-        print('{}{:2}. {:20} in {:<20} priority {:>5}'.format(visited_status, i, place[0], place[1], place[2]))
-    print('{} places. You still want to visit {} places. '.format(unvisited_count, len(place_details) -
+        print('{}{:1}. {:20} in {:<20} priority {:>5}'.format(visited_status, i, place[0], place[1], place[2]))
+    print('{} places. You still want to visit {} places. '.format(len(place_details), len(place_details) -
                                                                   unvisited_count))
 
 
@@ -116,8 +119,28 @@ def add_new_place(place_details):
     place_name = check_string('Name: ')
     place_country = check_string('Country: ')
     place_priority = check_integer('Priority: ')
-    place_details.append([place_name, place_country, place_priority, 'u'])
+    place_details.append([place_name, place_country, place_priority, 'n'])
     print('{} in {} (priority {}) added to Travel Tracker'.format(place_name, place_country, place_priority))
+
+
+def mark_visited(place_details):
+    """Marks place visited and displays unvisited places in the list via '*' symbol."""
+    # iterate through list of places until all places are visited.
+    if not[place for place in place_details if place[3] == "n"]:
+        print("{} places. No places left to visit. Why not add a new place to visit? ".format(len(place_details)))
+        return
+
+    place_visited = check_integer("Enter the number of place to mark as visited: ")
+    while place_visited not in range(len(place_details)):
+        print("Invalid place number")
+        place_visited = check_integer("Enter the number of place to mark as visited: ")
+    for i in range(len(place_details)):
+        if place_visited == i:
+            if place_details[place_visited][3] == "n":
+                place_details[place_visited][3] = "v"
+                print("{} in {} visited! ".format(place_details[place_visited][0], place_details[place_visited][1]))
+            else:
+                print("You already visited {}. ".format(place_details[place_visited][0]))
 
 
 def save_places(place_details):
