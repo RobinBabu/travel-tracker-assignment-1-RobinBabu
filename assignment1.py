@@ -17,7 +17,7 @@ def main():
     print("Welcome to Travel Tracker 1.0 - by Robin Babu")
     print("{} places loaded from places.csv".format(len(place_details)))
 
-    choice = get_choice()
+    choice = get_choice()   # Menu function
 
     while choice != "Q":
         if choice == "L":
